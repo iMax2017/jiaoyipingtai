@@ -7,12 +7,12 @@ class UserminController extends BaseController{
     }
     public function Landing(){
         if(session('?id'))
-        $this->error("您已登录",U('/main'),1);
+        $this->error("您已登录",U('/list'),1);
         $this->display('landing');
     }
     public function alterpwdhtml(){
         if(!session('?id'))
-        $this->error("请先登录",U('/main'),1);
+        $this->error("请先登录",U('/list'),1);
         $this->display('alterpwd');
     }
     public function register(){
@@ -118,7 +118,7 @@ class UserminController extends BaseController{
         if(session('?id'))
         session('id',null);
         $_SESSION['admin'] = 0;
-        $this->success('注销成功',U('/main'),0);
+        $this->success('注销成功',U('/list'),0);
         
     }
     public function encryptPwd($password){

@@ -12,7 +12,8 @@ class IndexController extends Controller {
         $noticeModel = D('Notice');
         $notice = $noticeModel->queryNotice();
         $this->assign(notice,$notice['noticetext']);
-        $this->display('index');
+
+        $this->display('Aboutus/index');
     }
     public function admin(){//管理员界面\
     if($_SESSION['admin'] == 0){
