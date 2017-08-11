@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="__ROOT__\Application\Home\View\Store\css\peoplestorelist.css" media="screen" title="no title" charset="utf-8">
+    <title>Document</title>
+</head>
+
+<body background="__PUBLIC__\img\store.jpg">
+    <h1 align="center">个人商品列表</h1>
+    <section>
+        <ul>
+            <foreach name="data" item="li">
+                <li>
+                    <a href="#"><img src="__PUBLIC__/image/{$li.image}" alt="" />
+                        <div class="delete">
+                            <a href="{:U('Home/Store/Delete',array('id'=>$li['goodsname'],'username'=>$li['username']))}">删除</a>
+                        </div>
+
+                        <div class="desc">类型:{$li.goodsname}</div>
+                        <div class="desc">介绍:{$li.introduce}</div>
+                        <div class="money">价格:{$li.price}</div>
+                        <div class="desc">联系方式:{$li.phone}</div>
+                    </a>
+                </li>
+            </foreach>
+        </ul>
+    </section>
+    <footer>
+        &copy BY IMAX2017
+    </footer>
+</body>
+
+</html>
