@@ -39,7 +39,7 @@ class StoreController extends BaseController{
                     $this->error = '请添加jpg图片';
                 }
                 if($flag){//压缩图片
-                    $data['image'] = $filename.'.jpg';
+                    $data['image'] = $filename.'.jpg'; 
                     $this->zip($data['image']);
                     $storeModel = D('Store');
                 }
@@ -94,10 +94,10 @@ class StoreController extends BaseController{
         $this->assign('data',$data);
         $this->display('adminstorelist');
     }
-    
+        
     public function upload($fileinfo,$filename){//上传文件函数
         $upload = new \Think\Upload();
-        $upload->maxSize = 3145728 ;
+        $upload->maxSize = 3145728000 ;
         $upload->autoSub = false;
         $upload->exts = array('jpg','jpeg');//设置文件允许传送类型
         $upload->rootPath = './Public/image/';

@@ -9,6 +9,7 @@
     <meta name="description" content="民大二手滑板直卖网，汇集二手滑板买卖信息,私人二手滑板转让，是您买卖二手滑板的理想平台。" />
     <title>滑板车交易网</title>
     <link rel="icon" href="/huabanshe/Public/img/pic09.jpg">
+    <link rel="stylesheet" type="text/css" href=" !-PUBLIC-!/Css/page.css" />
     <link rel="stylesheet" href="/huabanshe\Application\Home\View\Index\semantic.min.css" media="screen" title="no title" charset="utf-8">
     <script type="text/javascript" src="/huabanshe\Application\Home\View\Index\jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="/huabanshe\Application\Home\View\Index\semantic.min.js"></script>
@@ -34,9 +35,13 @@
                 <div class="ui menu">
                     <a class="item" href="<?php echo U('/logout');?>"><i class="olive sign out icon"></i> 注销</a>
                     <a class="item" href="<?php echo U('/addgood');?>"><i class="green add icon"></i> 添加商品</a>
+                    <a class="item" href="<?php echo U('/peoplelist');?>"><i class="red level down icon"></i> 下架商品</a>
                     <a class="item" onclick="$('#changepass').modal('show');"><i class="teal settings icon"></i> 更改密码</a>
                 </div>
-            </div><?php endif; ?>
+            </div>
+            <?php if($_SESSION['admin'] == 1): ?><div>
+                    <a class="item" href="admin"><i class="yellow user icon"></i>管理后台</a>
+                </div><?php endif; endif; ?>
         <!-- 登录后显示    结束  -->
     </div>
     <div class="ui small modal" id="login">
@@ -79,7 +84,7 @@
 
         function success(session_id) {
             alert("登陆成功！");
-            window.location.href = "";
+            window.location.href = "<?php echo U('/list');?>";
         }
 
         function login() {
@@ -174,7 +179,7 @@
 
             function success1() {
                 alert("注册成功！");
-                window.location.href = "";
+                window.location.href = "<?php echo U('/list');?>";
             }
 
             function submit() {
@@ -258,10 +263,10 @@
 
         <div class="ui four stackable  cards">
             <?php if(is_array($list)): foreach($list as $key=>$vv): ?><div class="ui raised link card">
-                    <div class="image"><img src="/huabanshe/Public/image/<?php echo ($vv["image"]); ?>" width="100%" height="30%"></div>
+                    <div class="image"><img src="/huabanshe/Public/image/<?php echo ($vv["image"]); ?>" width="100%" style="height:290px;"></div>
                     <div class="content">
                         <a class="header">类型 </a><?php echo ($vv["goodsname"]); ?>
-                        <div class="description"><?php echo ($vv["introduce"]); ?>}</div>
+                        <div class="description"><?php echo ($vv["introduce"]); ?></div>
                     </div>
                     <div class="content">
                         <span class="right floated">
@@ -271,39 +276,10 @@
                     <div class="ui inverted red bottom attached button"><i class="yen icon"></i><?php echo ($vv["price"]); ?></div>
                 </div><?php endforeach; endif; ?>
         </div>
-
-        <?php echo ($page); ?>
+        <div class="pages">
+            <?php echo ($page); ?>
+        </div>
     </div>
-
-    <!--666666666666666666666666666666666666666666666666666666666666666666666-->
-    <!--script type="text/javascript">
-       /* function submit() {
-
-            $("#sign_up").addClass("loading");
-            $.ajax({
-                url: "<?php echo U('Usermin/register');?>",
-                type: 'POST',
-                async: true,
-                data: {
-                    username: $("#username1").val(),
-                    password1: $("#password1").val(),
-                    password2: $("#password2").val(),
-                    email: $("#email").val(),
-                    verify: $("#verify").val(),
-                    // _csrf: document.head.getAttribute('data-csrf-token')
-                },
-                success: function(data) {
-                    // console.log(data);
-
-                }
-            }, );
-        }
-        $(document).ready(function() {
-            $("#sign_up").click(function() {
-                submit();
-            });
-       });
-    </script-->
 
     <!--啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊-->
 
@@ -373,7 +349,7 @@
 
         function changesuccess(session_id) {
             alert("修改成功！");
-            window.location.href = "";
+            window.location.href = "<?php echo U('/list');?>";
             //    $('#changepass').modal('hide');
         }
 

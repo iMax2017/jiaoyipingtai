@@ -9,6 +9,7 @@
     <meta name="description" content="民大二手滑板直卖网，汇集二手滑板买卖信息,私人二手滑板转让，是您买卖二手滑板的理想平台。" />
     <title>滑板车交易网</title>
     <link rel="icon" href="__PUBLIC__/img/pic09.jpg">
+    <load href=" !-PUBLIC-!/Css/page.css" />
     <link rel="stylesheet" href="__ROOT__\Application\Home\View\Index\semantic.min.css" media="screen" title="no title" charset="utf-8">
     <script type="text/javascript" src="__ROOT__\Application\Home\View\Index\jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="__ROOT__\Application\Home\View\Index\semantic.min.js"></script>
@@ -31,15 +32,22 @@
         <!-- 登录前显示    结束  -->
         <!-- 登录后显示    开始  -->
         <if condition="$islogin eq 1">
+
             <div class="ui simple dropdown right yellow item">
                 <i class="yellow user icon"></i>个人信息
                 <i class="dropdown icon"></i>
                 <div class="ui menu">
                     <a class="item" href="{:U('/logout')}"><i class="olive sign out icon"></i> 注销</a>
                     <a class="item" href="{:U('/addgood')}"><i class="green add icon"></i> 添加商品</a>
+                    <a class="item" href="{:U('/peoplelist')}"><i class="red level down icon"></i> 下架商品</a>
                     <a class="item" onclick="$('#changepass').modal('show');"><i class="teal settings icon"></i> 更改密码</a>
                 </div>
             </div>
+            <if condition="$_SESSION['admin'] eq 1">
+                <div>
+                    <a class="item" href="admin"><i class="yellow user icon"></i>管理后台</a>
+                </div>
+            </if>
         </if>
         <!-- 登录后显示    结束  -->
     </div>
@@ -83,7 +91,7 @@
 
         function success(session_id) {
             alert("登陆成功！");
-            window.location.href = "";
+            window.location.href = "{:U('/list')}";
         }
 
         function login() {
@@ -178,7 +186,7 @@
 
             function success1() {
                 alert("注册成功！");
-                window.location.href = "";
+                window.location.href = "{:U('/list')}";
             }
 
             function submit() {
@@ -263,10 +271,10 @@
         <div class="ui four stackable  cards">
             <foreach name="list" item="vv">
                 <div class="ui raised link card">
-                    <div class="image"><img src="__PUBLIC__/image/{$vv.image}" width="100%" height="30%"></div>
+                    <div class="image"><img src="__PUBLIC__/image/{$vv.image}" width="100%" style="height:290px;"></div>
                     <div class="content">
                         <a class="header">类型 </a>{$vv.goodsname}
-                        <div class="description">{$vv.introduce}}</div>
+                        <div class="description">{$vv.introduce}</div>
                     </div>
                     <div class="content">
                         <span class="right floated">
@@ -277,39 +285,10 @@
                 </div>
             </foreach>
         </div>
-
-        {$page}
+        <div class="pages">
+            {$page}
+        </div>
     </div>
-
-    <!--666666666666666666666666666666666666666666666666666666666666666666666-->
-    <!--script type="text/javascript">
-       /* function submit() {
-
-            $("#sign_up").addClass("loading");
-            $.ajax({
-                url: "{:U('Usermin/register')}",
-                type: 'POST',
-                async: true,
-                data: {
-                    username: $("#username1").val(),
-                    password1: $("#password1").val(),
-                    password2: $("#password2").val(),
-                    email: $("#email").val(),
-                    verify: $("#verify").val(),
-                    // _csrf: document.head.getAttribute('data-csrf-token')
-                },
-                success: function(data) {
-                    // console.log(data);
-
-                }
-            }, );
-        }
-        $(document).ready(function() {
-            $("#sign_up").click(function() {
-                submit();
-            });
-       });
-    </script-->
 
     <!--啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊-->
 
@@ -379,7 +358,7 @@
 
         function changesuccess(session_id) {
             alert("修改成功！");
-            window.location.href = "";
+            window.location.href = "{:U('/list')}";
             //    $('#changepass').modal('hide');
         }
 
